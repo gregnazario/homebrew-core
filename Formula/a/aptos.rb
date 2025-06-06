@@ -39,7 +39,7 @@ class Aptos < Formula
   def install
     # FIXME: Look into a different way to specify extra RUSTFLAGS in superenv as they override .cargo/config.toml
     # Ref: https://github.com/Homebrew/brew/blob/master/Library/Homebrew/extend/ENV/super.rb#L65
-    ENV.append "RUSTFLAGS", "--cfg tokio_unstable -C force-frame-pointers=yes -C force-unwind-tables=yes"
+    ENV.append "RUSTFLAGS", "--cfg tokio_unstable -C force-frame-pointers=yes -C force-unwind-tables=yes -C target-feature=-sse4.2,-avx"
     system "cargo", "install", *std_cargo_args(path: "crates/aptos"), "--profile=cli"
   end
 
